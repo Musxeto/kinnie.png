@@ -15,10 +15,7 @@ const SignUp = () => {
         </div>
         <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
           <form className="card-body signup">
-            <p className="font-bold text-center text-2xl">
-              {" "}
-              Sign Up to Continue
-            </p>
+            <p className="font-bold text-center text-2xl"> Sign Up</p>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Name</span>
