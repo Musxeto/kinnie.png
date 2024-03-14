@@ -5,7 +5,7 @@ import ImageGallery from "./HomeComponents/ImageGallery";
 
 const Home = () => {
   return (
-    <div>
+    <div className="max-w-4xl mx-auto">
       <Navbar />
       <UploadForm />
       <ImageGallery />

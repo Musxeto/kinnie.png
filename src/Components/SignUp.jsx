@@ -5,7 +5,7 @@ const SignUp = () => {
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content flex-col">
         <div className="text-center ">
-          <h1 className="text-5xl font-bold">m u s . p n g</h1>
+          <h1 className="text-5xl font-bold">m u s . p n g 📷</h1>
           <p className="py-4 lg:px-40 lg:mx-25 font-bold">
             "Embark on a journey of visual storytelling, where every login
             unlocks a world of shared moments, weaving a tapestry of memories
