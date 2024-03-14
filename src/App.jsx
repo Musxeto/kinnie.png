@@ -1,20 +1,10 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./Components/Home";
-import SignUp from "./Components/SignUp";
-import Login from "./Components/Login";
+import { useState } from "react";
 import "./App.css";
-import { AuthProvider } from "./Context/auth";
+
 function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
-    </BrowserRouter>
-  );
+  const [count, setCount] = useState(0);
+
+  return <h1 className="text-3xl font-bold underline">Hello world!</h1>;
 }
 
 export default App;
