@@ -4,6 +4,7 @@ import Home from "./Components/Home";
 import SignUp from "./Components/SignUp";
 import Login from "./Components/Login";
 import "./App.css";
+import { AuthProvider } from "./Context/auth";
 function App() {
   return (
     <BrowserRouter>
