@@ -2,20 +2,14 @@ import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert, Container } from "react-bootstrap";
 import { useAuth } from "../Contexts/AuthContext";
 import { Link } from "react-router-dom";
-const Signup = () => {
-  const usernameRef = useRef();
+const Login = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const passwordConfirmRef = useRef();
   const { signup, currentUser } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Passwords Do Not Match");
-    }
 
     try {
       setError("");
@@ -46,10 +40,6 @@ const Signup = () => {
               )}
               {error && <Alert variant="danger">{error}</Alert>}
               <Form onSubmit={handleSubmit} className="signup">
-                <Form.Group id="username">
-                  <Form.Label>Username:</Form.Label>
-                  <Form.Control type="text" ref={usernameRef} required />
-                </Form.Group>
                 <Form.Group id="email">
                   <Form.Label>Email:</Form.Label>
                   <Form.Control type="email" ref={emailRef} required />
@@ -58,28 +48,20 @@ const Signup = () => {
                   <Form.Label>Password:</Form.Label>
                   <Form.Control type="password" ref={passwordRef} required />
                 </Form.Group>
-                <Form.Group id="password-confirm">
-                  <Form.Label>Confirm Password:</Form.Label>
-                  <Form.Control
-                    type="password"
-                    ref={passwordConfirmRef}
-                    required
-                  />
-                </Form.Group>
                 <Button
                   disabled={loading || currentUser !== null}
                   className="w-100"
                   type="submit"
                 >
-                  Sign Up
+                  Login
                 </Button>
               </Form>
             </Card.Body>
           </Card>
           <div className="w-100 text-center mt-2 ">
-            Already have an account?{" "}
-            <Link to="/login" className="cursor-pointer">
-              Log In
+            Doesn't have an Account?{" "}
+            <Link to="/signup" className="cursor-pointer">
+              Sign Up
             </Link>
           </div>
         </div>
@@ -88,4 +70,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Login;
