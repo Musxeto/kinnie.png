@@ -4,7 +4,10 @@ import { useContext } from "react";
 import { createContext } from "react";
 
 import { auth } from "../firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+} from "firebase/auth";
 
 const AuthContext = createContext();
 
@@ -18,6 +21,9 @@ export const AuthProvider = ({ children }) => {
   const signup = ({ email, password }) => {
     createUserWithEmailAndPassword(email, password);
   };
+  onAuthStateChanged((user) => {
+    setCurrentUser(user);
+  });
   const value = {
     currentUser,
   };
