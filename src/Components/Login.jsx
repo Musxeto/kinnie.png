@@ -32,7 +32,7 @@ const Login = () => {
         <div className="w-100" style={{ maxWidth: "400px" }}>
           <Card>
             <Card.Body>
-              <h2 className="text-center mb-4">Sign Up</h2>
+              <h2 className="text-center mb-4">Login</h2>
               {!error && (
                 <Alert variant="success">
                   Account {JSON.stringify(currentUser.email)} Logged In
