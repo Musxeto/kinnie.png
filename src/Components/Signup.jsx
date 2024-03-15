@@ -1,6 +1,11 @@
 import React from "react";
+import { useRef } from "react";
 import { Form, Button, Card } from "react-bootstrap";
 const Signup = () => {
+  const usernameRef = useRef();
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const passwordConfirmRef = useRef();
   return (
     <>
       <Card>
@@ -22,7 +27,7 @@ const Signup = () => {
             <Form.Group id="password">
               <Form.Label>Password:</Form.Label>
               <Form.Control
-                type="password-"
+                type="password"
                 ref={passwordRef}
                 required
               ></Form.Control>
@@ -41,8 +46,8 @@ const Signup = () => {
           </Form>
         </Card.Body>
       </Card>
-      <div className="w-100 text-center mt-2">
-        Already have an account? <a>Log In</a>
+      <div className="w-100 text-center mt-2 ">
+        Already have an account? <a className="cursor-pointer">Log In</a>
       </div>
     </>
   );
