@@ -36,7 +36,7 @@ const Signup = () => {
           <h2 className="text-center mb-4">Sign Up</h2>
           {!error && (
             <Alert variant="success">
-              Account {JSON.stringify(currentUser.email)} Logged In
+              Account {JSON.stringify(currentUser.email)} Logged
             </Alert>
           )}
           {error && <Alert variant="danger">{error}</Alert>}
@@ -57,7 +57,11 @@ const Signup = () => {
               <Form.Label>Confirm Password:</Form.Label>
               <Form.Control type="password" ref={passwordConfirmRef} required />
             </Form.Group>
-            <Button disabled={loading} className="w-100" type="submit">
+            <Button
+              disabled={loading || currentUser !== null}
+              className="w-100"
+              type="submit"
+            >
               Sign Up
             </Button>
           </Form>
