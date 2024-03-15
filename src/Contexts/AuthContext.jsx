@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    return signOut(auth); // Ensure that signOut is called with the auth object
+    return signOut(auth);
   };
 
   useEffect(() => {
