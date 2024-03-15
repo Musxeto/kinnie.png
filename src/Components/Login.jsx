@@ -1,13 +1,17 @@
 import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert, Container } from "react-bootstrap";
 import { useAuth } from "../Contexts/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
+
 const Login = () => {
+  const usernameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { signin, currentUser } = useAuth();
+  const passwordConfirmRef = useRef();
+  const { signup, currentUser } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate(); // Initialize useNavigate hook
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -15,6 +19,7 @@ const Login = () => {
       setError("");
       setLoading(true);
       await signin(emailRef.current.value, passwordRef.current.value);
+      navigate("/");
     } catch {
       setError("Failed to log in");
     }

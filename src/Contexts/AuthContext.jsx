@@ -1,16 +1,12 @@
-import React from "react";
-import { useState } from "react";
-import { useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { createContext } from "react";
 import {
   onAuthStateChanged,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
-
-import { auth } from "../firebase"; // Correct import
-
-import { useEffect } from "react";
+import { auth } from "../firebase";
 
 const AuthContext = createContext();
 
@@ -19,36 +15,41 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState();
+  const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const signup = (email, password) => {
-    createUserWithEmailAndPassword(auth, email, password);
+    return createUserWithEmailAndPassword(auth, email, password);
   };
 
   const signin = async (email, password) => {
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      return await signInWithEmailAndPassword(auth, email, password);
     } catch (error) {
-      // Handle error
       console.error("Error logging in:", error);
-      throw error; // Rethrow error to be handled by the component
+      throw error;
     }
   };
 
+  const logout = () => {
+    return signOut(auth); // Ensure that signOut is called with the auth object
+  };
+
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
       setLoading(false);
     });
-    return unsub;
+    return unsubscribe;
   }, []);
 
   const value = {
     currentUser,
     signup,
     signin,
+    logout,
   };
+
   return (
     <AuthContext.Provider value={value}>
       {!loading && children}

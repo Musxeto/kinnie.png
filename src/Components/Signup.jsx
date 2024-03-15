@@ -1,7 +1,8 @@
 import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert, Container } from "react-bootstrap";
 import { useAuth } from "../Contexts/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
+
 const Signup = () => {
   const usernameRef = useRef();
   const emailRef = useRef();
@@ -10,6 +11,8 @@ const Signup = () => {
   const { signup, currentUser } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate(); // Initialize useNavigate hook
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -21,6 +24,7 @@ const Signup = () => {
       setError("");
       setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value);
+      navigate("/"); // Use navigate function to navigate to home page
     } catch {
       setError("Failed to create Account");
     }
@@ -38,6 +42,7 @@ const Signup = () => {
         <div className="w-100" style={{ maxWidth: "400px" }}>
           <Card>
             <Card.Body>
+              {currentUser && currentUser.email}
               <h2 className="text-center mb-4">Sign Up</h2>
               {error && <Alert variant="danger">{error}</Alert>}
               <Form onSubmit={handleSubmit} className="signup">
