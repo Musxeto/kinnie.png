@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Login = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { signup, currentUser } = useAuth();
+  const { signin, currentUser } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const handleSubmit = async (e) => {
@@ -14,12 +14,12 @@ const Login = () => {
     try {
       setError("");
       setLoading(true);
-      await signup(emailRef.current.value, passwordRef.current.value);
+      await signin(emailRef.current.value, passwordRef.current.value);
     } catch {
-      setError("Failed to create Account");
+      setError("Failed to log in");
     }
     setLoading(false);
-    const signupForm = document.querySelector(".signup");
+    const signupForm = document.querySelector(".login");
     signupForm.reset();
   };
 
@@ -33,13 +33,8 @@ const Login = () => {
           <Card>
             <Card.Body>
               <h2 className="text-center mb-4">Login</h2>
-              {!error && (
-                <Alert variant="success">
-                  Account {JSON.stringify(currentUser.email)} Logged In
-                </Alert>
-              )}
-              {error && <Alert variant="danger">{error}</Alert>}
-              <Form onSubmit={handleSubmit} className="signup">
+
+              <Form onSubmit={handleSubmit} className="login">
                 <Form.Group id="email">
                   <Form.Label>Email:</Form.Label>
                   <Form.Control type="email" ref={emailRef} required />

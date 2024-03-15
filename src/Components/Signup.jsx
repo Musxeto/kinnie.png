@@ -39,11 +39,6 @@ const Signup = () => {
           <Card>
             <Card.Body>
               <h2 className="text-center mb-4">Sign Up</h2>
-              {!error && (
-                <Alert variant="success">
-                  Account {JSON.stringify(currentUser.email)} Logged In
-                </Alert>
-              )}
               {error && <Alert variant="danger">{error}</Alert>}
               <Form onSubmit={handleSubmit} className="signup">
                 <Form.Group id="username">

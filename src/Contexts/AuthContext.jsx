@@ -3,8 +3,9 @@ import { useState } from "react";
 import { useContext } from "react";
 import { createContext } from "react";
 import {
-  createUserWithEmailAndPassword,
   onAuthStateChanged,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 
 import { auth } from "../firebase"; // Correct import
@@ -20,8 +21,19 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
+
   const signup = (email, password) => {
     createUserWithEmailAndPassword(auth, email, password);
+  };
+
+  const signin = async (email, password) => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+    } catch (error) {
+      // Handle error
+      console.error("Error logging in:", error);
+      throw error; // Rethrow error to be handled by the component
+    }
   };
 
   useEffect(() => {
@@ -35,6 +47,7 @@ export const AuthProvider = ({ children }) => {
   const value = {
     currentUser,
     signup,
+    signin,
   };
   return (
     <AuthContext.Provider value={value}>
