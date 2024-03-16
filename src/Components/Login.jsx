@@ -47,12 +47,17 @@ const Login = () => {
                 </Form.Group>
                 <Button
                   disabled={loading || currentUser !== null}
-                  className="w-100"
+                  className="w-100 mt-2"
                   type="submit"
                 >
                   Login
                 </Button>
               </Form>
+              <div className="w-100 text-center mt-2 ">
+                <Link to="/forgor-pass" className="cursor-pointer">
+                  forgor pass 💀?
+                </Link>
+              </div>
             </Card.Body>
           </Card>
           <div className="w-100 text-center mt-2 ">

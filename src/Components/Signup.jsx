@@ -68,7 +68,7 @@ const Signup = () => {
                 </Form.Group>
                 <Button
                   disabled={loading || currentUser !== null}
-                  className="w-100"
+                  className="w-100 mt-2"
                   type="submit"
                 >
                   Sign Up
