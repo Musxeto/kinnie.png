@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
-import { Form, Button, Card, Alert, Container } from "react-bootstrap";
 import { useAuth } from "../Contexts/AuthContext";
-import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
+import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const usernameRef = useRef();
@@ -11,7 +10,7 @@ const Signup = () => {
   const { signup, currentUser } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate(); // Initialize useNavigate hook
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,67 +23,104 @@ const Signup = () => {
       setError("");
       setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value);
-      navigate("/"); // Use navigate function to navigate to home page
+      navigate("/");
     } catch {
       setError("Failed to create Account");
     }
     setLoading(false);
-    const signupForm = document.querySelector(".signup");
-    signupForm.reset();
   };
 
   return (
-    <>
-      <Container
-        className="d-flex align-items-center justify-content-center"
-        style={{ minHeight: "100vh" }}
-      >
-        <div className="w-100" style={{ maxWidth: "400px" }}>
-          <Card>
-            <Card.Body>
-              {currentUser && currentUser.email}
-              <h2 className="text-center mb-4">Sign Up</h2>
-              {error && <Alert variant="danger">{error}</Alert>}
-              <Form onSubmit={handleSubmit} className="signup">
-                <Form.Group id="username">
-                  <Form.Label>Username:</Form.Label>
-                  <Form.Control type="text" ref={usernameRef} required />
-                </Form.Group>
-                <Form.Group id="email">
-                  <Form.Label>Email:</Form.Label>
-                  <Form.Control type="email" ref={emailRef} required />
-                </Form.Group>
-                <Form.Group id="password">
-                  <Form.Label>Password:</Form.Label>
-                  <Form.Control type="password" ref={passwordRef} required />
-                </Form.Group>
-                <Form.Group id="password-confirm">
-                  <Form.Label>Confirm Password:</Form.Label>
-                  <Form.Control
-                    type="password"
-                    ref={passwordConfirmRef}
-                    required
-                  />
-                </Form.Group>
-                <Button
-                  disabled={loading || currentUser !== null}
-                  className="w-100 mt-2"
-                  type="submit"
-                >
-                  Sign Up
-                </Button>
-              </Form>
-            </Card.Body>
-          </Card>
-          <div className="w-100 text-center mt-2 ">
-            Already have an account?{" "}
-            <Link to="/login" className="cursor-pointer">
-              Log In
-            </Link>
+    <div className="min-h-screen flex justify-center items-center py-12 px-4 sm:px-6 lg:px-8 bg-yellow-400">
+      <div className="max-w-md w-full bg-white p-8 rounded shadow-md">
+        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+          Sign Up
+        </h2>
+        {error && <p className="text-red-500 text-center">{error}</p>}
+        <form onSubmit={handleSubmit}>
+          <div className="rounded-md shadow-sm -space-y-px">
+            <div className="text-center">
+              <label htmlFor="username" className="sr-only">
+                Username
+              </label>
+              <input
+                id="username"
+                name="username"
+                type="text"
+                autoComplete="username"
+                ref={usernameRef}
+                required
+                className="input-field m-3 p-2 outline-none border border-gray-300 rounded-md focus:ring focus:ring-yellow-500"
+                placeholder="Username"
+              />
+            </div>
+            <div className="text-center">
+              <label htmlFor="email" className="sr-only">
+                Email address
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                ref={emailRef}
+                required
+                className="input-field m-3 p-2 outline-none border border-gray-300 rounded-md focus:ring focus:ring-yellow-500"
+                placeholder="Email address"
+              />
+            </div>
+            <div className="text-center">
+              <label htmlFor="password" className="sr-only">
+                Password
+              </label>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                autoComplete="new-password"
+                ref={passwordRef}
+                required
+                className="input-field m-3 p-2 outline-none border border-gray-300 rounded-md focus:ring focus:ring-yellow-500"
+                placeholder="Password"
+              />
+            </div>
+            <div className="text-center">
+              <label htmlFor="password-confirm" className="sr-only">
+                Confirm Password
+              </label>
+              <input
+                id="password-confirm"
+                name="password-confirm"
+                type="password"
+                autoComplete="new-password"
+                ref={passwordConfirmRef}
+                required
+                className="input-field m-3 p-2 outline-none border border-gray-300 rounded-md focus:ring focus:ring-yellow-500"
+                placeholder="Confirm Password"
+              />
+            </div>
           </div>
+          <div className="flex justify-center">
+            <button
+              disabled={loading || currentUser !== null}
+              className="button mt-4 w-40 bg-yellow-600 text-white py-2 px-4 rounded-md hover:bg-yellow-700"
+              type="submit"
+            >
+              {loading ? "Signing Up..." : "Sign Up"}
+            </button>
+          </div>
+        </form>
+        <div className="text-center mt-2">
+          Already have an account?{" "}
+          <Link
+            to="/login"
+            className="font-medium text-yellow-600 hover:text-yellow-500"
+          >
+            Log In
+          </Link>
         </div>
-      </Container>
-    </>
+      </div>
+    </div>
   );
 };
 

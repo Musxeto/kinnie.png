@@ -1,5 +1,5 @@
 import React from "react";
-import { Container } from "react-bootstrap";
+import "./App.css";
 import Signup from "./Components/Signup";
 import Home from "./Components/Home";
 import { AuthProvider } from "./Contexts/AuthContext";

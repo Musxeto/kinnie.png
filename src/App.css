@@ -1,0 +1,32 @@
+@font-face {
+    font-family: "Retro Gaming";
+    src: url("https://db.onlinewebfonts.com/t/4c19fc875e7ba1e6831129de3ab5ac0b.eot");
+    src: url("https://db.onlinewebfonts.com/t/4c19fc875e7ba1e6831129de3ab5ac0b.eot?#iefix")format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/4c19fc875e7ba1e6831129de3ab5ac0b.woff2")format("woff2"),
+    url("https://db.onlinewebfonts.com/t/4c19fc875e7ba1e6831129de3ab5ac0b.woff")format("woff"),
+    url("https://db.onlinewebfonts.com/t/4c19fc875e7ba1e6831129de3ab5ac0b.ttf")format("truetype"),
+    url("https://db.onlinewebfonts.com/t/4c19fc875e7ba1e6831129de3ab5ac0b.svg#Retro Gaming")format("svg");
+}
+@font-face {
+    font-family: "Super Mario Bros.";
+    src: url("https://db.onlinewebfonts.com/t/29f4c6fe36801450398679968448cf3d.eot");
+    src: url("https://db.onlinewebfonts.com/t/29f4c6fe36801450398679968448cf3d.eot?#iefix")format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/29f4c6fe36801450398679968448cf3d.woff2")format("woff2"),
+    url("https://db.onlinewebfonts.com/t/29f4c6fe36801450398679968448cf3d.woff")format("woff"),
+    url("https://db.onlinewebfonts.com/t/29f4c6fe36801450398679968448cf3d.ttf")format("truetype"),
+    url("https://db.onlinewebfonts.com/t/29f4c6fe36801450398679968448cf3d.svg#Super Mario Bros.")format("svg");
+}
+
+h1,h2,h3,div{
+    font-family: "Retro Gaming";
+}
+
+.heading{
+    font-family: "Retro Gaming";
+
+  font-style: normal;
+}
+  .mobile-menu-transition {
+    transition: transform 0.3s ease-in-out;
+  }
+  

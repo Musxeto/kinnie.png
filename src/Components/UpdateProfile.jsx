@@ -1,18 +1,16 @@
 import React, { useRef, useState } from "react";
-import { Form, Button, Card, Alert, Container } from "react-bootstrap";
 import { useAuth } from "../Contexts/AuthContext";
-import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
+import { Link, useNavigate } from "react-router-dom";
 
 const UpdateProfile = () => {
   const usernameRef = useRef();
-  const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
-  const { signup, currentUser, changePass } = useAuth();
+  const { currentUser, changePass } = useAuth();
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate(); // Initialize useNavigate hook
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,68 +32,86 @@ const UpdateProfile = () => {
       })
       .finally(() => {
         setLoading(false);
-        setLoading(false);
         const updateForm = document.querySelector(".update");
         updateForm.reset();
       });
   };
 
   return (
-    <>
-      <Container
-        className="d-flex align-items-center justify-content-center"
-        style={{ minHeight: "100vh" }}
-      >
-        <div className="w-100" style={{ maxWidth: "400px" }}>
-          <Card>
-            <Card.Body>
-              <h2 className="text-center mb-4">Update Profile</h2>
-              {message && <Alert variant="success">{message}</Alert>}
-              {error && <Alert variant="danger">{error}</Alert>}
-              <Form onSubmit={handleSubmit} className="update">
-                <Form.Group id="username">
-                  <Form.Label>Username:</Form.Label>
-                  <Form.Control type="text" ref={usernameRef} />
-                </Form.Group>
-                <Form.Group id="email">
-                  <Form.Label>Email:</Form.Label>
-                  <Form.Control
-                    type="email"
-                    ref={emailRef}
-                    disabled
-                    defaultValue={currentUser.email}
-                  />
-                </Form.Group>
-                <Form.Group id="password">
-                  <Form.Label>Password:</Form.Label>
-                  <Form.Control
-                    type="password"
-                    ref={passwordRef}
-                    placeholder="Leave Blank to keep the same..."
-                  />
-                </Form.Group>
-                <Form.Group id="password-confirm">
-                  <Form.Label>Confirm Password:</Form.Label>
-                  <Form.Control
-                    type="password"
-                    ref={passwordConfirmRef}
-                    placeholder="Leave Blank to keep the same..."
-                  />
-                </Form.Group>
-                <Button disabled={loading} className="w-100 mt-2" type="submit">
-                  Update Profile
-                </Button>
-              </Form>
-            </Card.Body>
-          </Card>
-          <div className="w-100 text-center mt-2 ">
-            <Link to="/" className="cursor-pointer">
-              Cancel
-            </Link>
-          </div>
+    <div className="min-h-screen flex items-center justify-center bg-yellow-400 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md mb-5 w-full space-y-8 bg-white p-8 rounded shadow-md  ">
+        <div>
+          <h2 className="mt-6 mb-4 text-center text-3xl font-extrabold text-gray-900 ">
+            Update Profile
+          </h2>
+          {message && <p className="text-green-500 text-center">{message}</p>}
+          {error && <p className="text-red-500 text-center">{error}</p>}
+          <form onSubmit={handleSubmit} className="update">
+            <div className="rounded-md shadow-sm -space-y-px">
+              <div className="text-center">
+                <label htmlFor="username" className="sr-only">
+                  Username
+                </label>
+                <input
+                  id="username"
+                  name="username"
+                  type="text"
+                  autoComplete="username"
+                  ref={usernameRef}
+                  className="input-field m-1 p-2 outline-none border border-gray-300 rounded-md focus:ring focus:ring-yellow-500"
+                  placeholder="Username"
+                />
+              </div>
+              <div className="text-center mt-2">
+                <label htmlFor="password" className="sr-only">
+                  Password
+                </label>
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  autoComplete="new-password"
+                  ref={passwordRef}
+                  className="input-field m-1 p-2 outline-none border border-gray-300 rounded-md focus:ring focus:ring-yellow-500"
+                  placeholder="New Password (Leave blank to keep the same)"
+                />
+              </div>
+              <div className="text-center mt-2">
+                <label htmlFor="password-confirm" className="sr-only">
+                  Confirm Password
+                </label>
+                <input
+                  id="password-confirm"
+                  name="password-confirm"
+                  type="password"
+                  autoComplete="new-password"
+                  ref={passwordConfirmRef}
+                  className="input-field m-1 p-2 outline-none border border-gray-300 rounded-md focus:ring focus:ring-yellow-500"
+                  placeholder="Confirm New Password"
+                />
+              </div>
+            </div>
+            <div className="flex justify-center">
+              <button
+                disabled={loading}
+                className="button mt-3 mx-auto bg-yellow-600 text-white py-2 px-4 rounded-md hover:bg-yellow-700 max-w-60"
+                type="submit"
+              >
+                {loading ? "Updating Profile..." : "Update Profile"}
+              </button>
+            </div>
+          </form>
         </div>
-      </Container>
-    </>
+        <div className="text-center mt-2">
+          <Link
+            to="/"
+            className="font-medium text-yellow-600 hover:text-yellow-500"
+          >
+            Cancel
+          </Link>
+        </div>
+      </div>
+    </div>
   );
 };
 
