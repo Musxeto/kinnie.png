@@ -1,17 +1,14 @@
 import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert, Container } from "react-bootstrap";
 import { useAuth } from "../Contexts/AuthContext";
-import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
-
+import { Link, useNavigate } from "react-router-dom";
 const Login = () => {
-  const usernameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
-  const passwordConfirmRef = useRef();
-  const { signup, currentUser } = useAuth();
+  const { signin, currentUser } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate(); // Initialize useNavigate hook
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
