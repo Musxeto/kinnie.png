@@ -78,7 +78,7 @@ const Login = () => {
           </form>
           <div className="text-center mt-2">
             <Link
-              to="/forgot-pass"
+              to="/forgor-pass"
               className="font-medium text-yellow-600 hover:text-yellow-500"
             >
               Forgot password?

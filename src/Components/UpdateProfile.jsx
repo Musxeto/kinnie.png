@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useAuth } from "../Contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -6,12 +6,20 @@ const UpdateProfile = () => {
   const usernameRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
+  const profilePicRef = useRef();
   const { currentUser, changePass } = useAuth();
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [photoURL, setPhotoURL] = useState(
+    "https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg"
+  );
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (currentUser?.photoURL) setPhotoURL(currentUser.photoURL);
+  }, [currentUser]);
+  const handleChange = () => {};
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage("");
@@ -39,15 +47,37 @@ const UpdateProfile = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-yellow-400 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md mb-5 w-full space-y-8 bg-white p-8 rounded shadow-md  ">
+      <div className="max-w-md mb-5 w-full bg-white p-8 rounded shadow-md">
         <div>
-          <h2 className="mt-6 mb-4 text-center text-3xl font-extrabold text-gray-900 ">
+          <h2 className="mt-6 mb-4 text-center text-3xl font-extrabold text-gray-900">
             Update Profile
           </h2>
           {message && <p className="text-green-500 text-center">{message}</p>}
           {error && <p className="text-red-500 text-center">{error}</p>}
           <form onSubmit={handleSubmit} className="update">
-            <div className="rounded-md shadow-sm -space-y-px">
+            <div className="flex items-center justify-center mb-4">
+              <div className="border-yellow-500 border-2 rounded-full overflow-hidden mr-4">
+                <img src={photoURL} alt="avatar" className="h-16 w-16" />
+              </div>
+              <div>
+                <input
+                  id="profilePic"
+                  name="profilePic"
+                  type="file"
+                  ref={profilePicRef}
+                  placeholder="Upload New Profile Pic"
+                  className="hidden"
+                  onChange={handleChange}
+                />
+                <label
+                  htmlFor="profilePic"
+                  className="button bg-yellow-600 text-white py-2 px-4 rounded-md hover:bg-yellow-700"
+                >
+                  {loading ? "Uploading..." : "Upload New Pic"}
+                </label>
+              </div>
+            </div>
+            <div className="space-y-4">
               <div className="text-center">
                 <label htmlFor="username" className="sr-only">
                   Username
@@ -62,7 +92,7 @@ const UpdateProfile = () => {
                   placeholder="Username"
                 />
               </div>
-              <div className="text-center mt-2">
+              <div className="text-center">
                 <label htmlFor="password" className="sr-only">
                   Password
                 </label>
@@ -76,7 +106,7 @@ const UpdateProfile = () => {
                   placeholder="New Password (Leave blank to keep the same)"
                 />
               </div>
-              <div className="text-center mt-2">
+              <div className="text-center">
                 <label htmlFor="password-confirm" className="sr-only">
                   Confirm Password
                 </label>
@@ -91,10 +121,10 @@ const UpdateProfile = () => {
                 />
               </div>
             </div>
-            <div className="flex justify-center">
+            <div className="flex justify-center mt-4">
               <button
                 disabled={loading}
-                className="button mt-3 mx-auto bg-yellow-600 text-white py-2 px-4 rounded-md hover:bg-yellow-700 max-w-60"
+                className="button bg-yellow-600 text-white py-2 px-4 rounded-md hover:bg-yellow-700"
                 type="submit"
               >
                 {loading ? "Updating Profile..." : "Update Profile"}

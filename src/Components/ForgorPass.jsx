@@ -55,10 +55,14 @@ const ForgorPass = () => {
               </div>
               <button
                 disabled={loading || currentUser !== null}
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 mt-4"
+                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 mt-4 disabled:bg-yellow-400"
                 type="submit"
               >
-                Reset Pass
+                {loading ? (
+                  <span>Sending Email...</span>
+                ) : (
+                  <span>Reset Password</span>
+                )}
               </button>
             </form>
           </div>
