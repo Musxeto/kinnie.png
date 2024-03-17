@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useAuth } from "../Contexts/AuthContext";
+import { uploadProfilepic } from "../firebase";
 import { Link, useNavigate } from "react-router-dom";
 
 const UpdateProfile = () => {
@@ -14,12 +15,18 @@ const UpdateProfile = () => {
   const [photoURL, setPhotoURL] = useState(
     "https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg"
   );
+  const [photo, setPhoto] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (currentUser?.photoURL) setPhotoURL(currentUser.photoURL);
   }, [currentUser]);
-  const handleChange = () => {};
+  const handleChange = (e) => {
+    if (e.target.files[0]) {
+      setPhoto(e.target.files[0]);
+    }
+    upload(photo, currentUser, setLoading);
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage("");
@@ -67,6 +74,7 @@ const UpdateProfile = () => {
                   ref={profilePicRef}
                   placeholder="Upload New Profile Pic"
                   className="hidden"
+                  disabled={loading}
                   onChange={handleChange}
                 />
                 <label
