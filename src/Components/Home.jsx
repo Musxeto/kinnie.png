@@ -9,11 +9,7 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-yellow-400">
       <Navbar />
-      <div className="home bg-yellow-400 min-h-screen">
-        <div className="h-20 w-20">
-          <img src={currentUser.photoURL} />
-        </div>
-      </div>
+      <div className="home"></div>
     </div>
   );
 };
