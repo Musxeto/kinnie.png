@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
 const firebaseConfig = {
   apiKey: "AIzaSyCFgI55Gk39pY0ald9ph0Nhkltn9T9KBrI",
   authDomain: "dotpng-baadf.firebaseapp.com",
@@ -11,5 +12,14 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const storage = getStorage();
 
 export { auth };
+
+//storage
+
+export async function uploadProfilepic(file, currentUser, setLoading) {
+  const fileRef = ref(storage, currentUser.uid + ".png");
+
+  const snapshot = await uploadBytes(fileRef, file);
+}
