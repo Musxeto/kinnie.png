@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useContext } from "react";
-import { createContext } from "react";
+// AuthContext.js
+import React, { createContext, useState, useEffect, useContext } from "react";
+import { auth } from "../firebase";
 import {
-  onAuthStateChanged,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
   sendPasswordResetEmail,
   updatePassword,
+  onAuthStateChanged,
 } from "firebase/auth";
-import { auth } from "../firebase";
 
 const AuthContext = createContext();
 
@@ -19,6 +19,14 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user);
+      setLoading(false);
+    });
+    return unsubscribe;
+  }, []);
 
   const signup = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -50,20 +58,12 @@ export const AuthProvider = ({ children }) => {
   const changePass = async (password) => {
     try {
       await updatePassword(auth.currentUser, password);
-      console.log("Password reset  successfully.");
+      console.log("Password reset successfully.");
     } catch (error) {
       console.error("Error resetting password:", error);
       throw error;
     }
   };
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user);
-      setLoading(false);
-    });
-    return unsubscribe;
-  }, []);
 
   const value = {
     currentUser,

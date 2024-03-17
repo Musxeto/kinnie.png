@@ -5,9 +5,10 @@ import { useAuth } from "../Contexts/AuthContext";
 
 const PrivateRoute = ({ children }) => {
   const { currentUser } = useAuth();
-  if (currentUser !== null) {
+  if (currentUser !== null && currentUser !== undefined) {
     return children;
   } else {
+    // Handle the loading state or redirect to login
     return <Navigate to={"/login"} />;
   }
 };

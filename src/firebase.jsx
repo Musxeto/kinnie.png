@@ -1,6 +1,10 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 const firebaseConfig = {
   apiKey: "AIzaSyCFgI55Gk39pY0ald9ph0Nhkltn9T9KBrI",
   authDomain: "dotpng-baadf.firebaseapp.com",
@@ -21,6 +25,16 @@ export { auth };
 export async function uploadProfilepic(file, currentUser, setLoading) {
   const fileRef = ref(storage, currentUser.uid + ".png");
 
-  const snapshot = await uploadBytes(fileRef, file);
-  setLoading(false);
+  await uploadBytes(fileRef, file); // Wait for the upload to complete
+
+  const photoURL = await getDownloadURL(fileRef); // Get the download URL
+
+  try {
+    await updateProfile(currentUser, { photoURL });
+    setLoading(false);
+  } catch (error) {
+    // Handle any errors with updating the profile
+    console.error("Error updating profile:", error);
+    setLoading(false);
+  }
 }

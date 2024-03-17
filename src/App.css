@@ -30,3 +30,10 @@ h1,h2,h3,div{
     transition: transform 0.3s ease-in-out;
   }
   
+  .profile-pic{
+    border-radius: 50%;
+    border: 2px orange solid;
+  }
+  .body{
+    background-color: orange;
+  }
