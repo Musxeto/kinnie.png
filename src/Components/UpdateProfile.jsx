@@ -128,6 +128,7 @@ const UpdateProfile = () => {
                     id="username1" // Unique ID
                     name="username"
                     type="text"
+                    defaultValue={currentUser.displayName}
                     autoComplete="username"
                     ref={usernameRef}
                     className="input-field min-w-80 m-1 p-2 outline-none border border-gray-300 rounded-md focus:ring focus:ring-yellow-500"
