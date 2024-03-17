@@ -40,21 +40,6 @@ const Signup = () => {
         <form onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm -space-y-px">
             <div className="text-center">
-              <label htmlFor="username" className="sr-only">
-                Username
-              </label>
-              <input
-                id="username"
-                name="username"
-                type="text"
-                autoComplete="username"
-                ref={usernameRef}
-                required
-                className="input-field m-3 p-2 outline-none border border-gray-300 rounded-md focus:ring focus:ring-yellow-500"
-                placeholder="Username"
-              />
-            </div>
-            <div className="text-center">
               <label htmlFor="email" className="sr-only">
                 Email address
               </label>

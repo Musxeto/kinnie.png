@@ -8,7 +8,7 @@ const UpdateProfile = () => {
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
 
-  const { currentUser, changePass } = useAuth();
+  const { currentUser, changePass, updateName } = useAuth();
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -47,6 +47,9 @@ const UpdateProfile = () => {
     if (passwordRef.current.value) {
       promises.push(changePass(passwordRef.current.value));
     }
+    if (usernameRef.current.value) {
+      promises.push(updateName(usernameRef.current.value));
+    }
     Promise.all(promises)
       .then(() => {
         setMessage("User Profile Updated!!");
@@ -68,6 +71,13 @@ const UpdateProfile = () => {
           <h2 className="mt-6 mb-4 text-center text-3xl font-extrabold text-gray-900">
             Update Profile
           </h2>
+          <div>
+            {currentUser?.displayName ? (
+              <p>Welcome {currentUser.displayName}</p>
+            ) : (
+              <p>Sup brp</p>
+            )}
+          </div>
           {message && (
             <p className="text-green-500 text-2xl text-center">{message}</p>
           )}
@@ -115,7 +125,7 @@ const UpdateProfile = () => {
                     Username
                   </label>
                   <input
-                    id="username"
+                    id="username1" // Unique ID
                     name="username"
                     type="text"
                     autoComplete="username"
@@ -125,12 +135,12 @@ const UpdateProfile = () => {
                   />
                 </div>
                 <div className="text-center mb-4">
-                  <label htmlFor="username" className="sr-only">
-                    Username
+                  <label htmlFor="email" className="sr-only">
+                    Email
                   </label>
                   <input
-                    id="username"
-                    name="username"
+                    id="email"
+                    name="email"
                     type="text"
                     className="input-field min-w-80 m-1 p-2 outline-none border border-gray-300 rounded-md focus:ring focus:ring-yellow-500"
                     disabled

@@ -8,6 +8,7 @@ import {
   sendPasswordResetEmail,
   updatePassword,
   onAuthStateChanged,
+  updateProfile,
 } from "firebase/auth";
 
 const AuthContext = createContext();
@@ -28,7 +29,7 @@ export const AuthProvider = ({ children }) => {
     return unsubscribe;
   }, []);
 
-  const signup = (email, password) => {
+  const signup = async (email, password, username) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
@@ -64,6 +65,20 @@ export const AuthProvider = ({ children }) => {
       throw error;
     }
   };
+  const updateName = async (username) => {
+    try {
+      await updateProfile(currentUser, {
+        displayName: username,
+      });
+      setCurrentUser({
+        ...currentUser,
+        displayName: username,
+      });
+    } catch (error) {
+      console.error("Error updating username: ", error);
+      throw error;
+    }
+  };
 
   const value = {
     currentUser,
@@ -72,6 +87,7 @@ export const AuthProvider = ({ children }) => {
     logout,
     resetPassword,
     changePass,
+    updateName,
   };
 
   return (
