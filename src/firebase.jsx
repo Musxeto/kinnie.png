@@ -18,15 +18,9 @@ export { auth };
 
 //storage
 
-export async function uploadProfilepic(
-  file,
-  currentUser,
-  setLoading,
-  setMessage
-) {
+export async function uploadProfilepic(file, currentUser, setLoading) {
   const fileRef = ref(storage, currentUser.uid + ".png");
 
   const snapshot = await uploadBytes(fileRef, file);
   setLoading(false);
-  setMessage("File Uploaded Successfully!");
 }

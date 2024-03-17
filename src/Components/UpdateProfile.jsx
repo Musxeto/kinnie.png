@@ -24,7 +24,7 @@ const UpdateProfile = () => {
   }
 
   function handleClick() {
-    uploadProfilepic(photo, currentUser, setLoading, setMessage);
+    uploadProfilepic(photo, currentUser, setLoading);
   }
 
   useEffect(() => {
