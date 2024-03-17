@@ -12,21 +12,26 @@ const UpdateProfile = () => {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [photo, setPhoto] = useState(null);
   const [photoURL, setPhotoURL] = useState(
     "https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg"
   );
-  const [photo, setPhoto] = useState(null);
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (currentUser?.photoURL) setPhotoURL(currentUser.photoURL);
-  }, [currentUser]);
-  const handleChange = (e) => {
+  function handleChange(e) {
     if (e.target.files[0]) {
       setPhoto(e.target.files[0]);
     }
-    upload(photo, currentUser, setLoading);
-  };
+  }
+
+  function handleClick() {
+    uploadProfilepic(photo, currentUser, setLoading, setMessage);
+  }
+
+  useEffect(() => {
+    if (currentUser?.photoURL) {
+      setPhotoURL(currentUser.photoURL);
+    }
+  }, [currentUser]);
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage("");
@@ -62,27 +67,16 @@ const UpdateProfile = () => {
           {message && <p className="text-green-500 text-center">{message}</p>}
           {error && <p className="text-red-500 text-center">{error}</p>}
           <form onSubmit={handleSubmit} className="update">
+            <img src={photoURL} alt="avatar" className="h-16 w-16" />
             <div className="flex items-center justify-center mb-4">
-              <div className="border-yellow-500 border-2 rounded-full overflow-hidden mr-4">
+              <div className="border-yellow-500 border-2 rounded-full mr-4">
                 <img src={photoURL} alt="avatar" className="h-16 w-16" />
               </div>
               <div>
-                <input
-                  id="profilePic"
-                  name="profilePic"
-                  type="file"
-                  ref={profilePicRef}
-                  placeholder="Upload New Profile Pic"
-                  className="hidden"
-                  disabled={loading}
-                  onChange={handleChange}
-                />
-                <label
-                  htmlFor="profilePic"
-                  className="button bg-yellow-600 text-white py-2 px-4 rounded-md hover:bg-yellow-700"
-                >
-                  {loading ? "Uploading..." : "Upload New Pic"}
-                </label>
+                <input type="file" onChange={handleChange} />
+                <button disabled={loading || !photo} onClick={handleClick}>
+                  Upload
+                </button>
               </div>
             </div>
             <div className="space-y-4">
