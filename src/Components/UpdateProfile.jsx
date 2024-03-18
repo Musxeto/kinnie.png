@@ -71,11 +71,11 @@ const UpdateProfile = () => {
           <h2 className="mt-6 mb-4 text-center text-3xl font-extrabold text-gray-900">
             Update Profile
           </h2>
-          <div>
+          <div className="text-center mb-4">
             {currentUser?.displayName ? (
-              <p>Welcome {currentUser.displayName}</p>
+              <p className="font-semibold">Welcome {currentUser.displayName}</p>
             ) : (
-              <p>Sup brp</p>
+              <p className="font-semibold">Sup brp</p>
             )}
           </div>
           {message && (
@@ -125,13 +125,13 @@ const UpdateProfile = () => {
                     Username
                   </label>
                   <input
-                    id="username1" // Unique ID
+                    id="username1"
                     name="username"
                     type="text"
                     defaultValue={currentUser.displayName}
                     autoComplete="username"
                     ref={usernameRef}
-                    className="input-field min-w-80 m-1 p-2 outline-none border border-gray-300 rounded-md focus:ring focus:ring-yellow-500"
+                    className="input-field sm:max-w-xs sm:w-full m-1 p-2 outline-none border border-gray-300 rounded-md focus:ring focus:ring-yellow-500"
                     placeholder="Username"
                   />
                 </div>
@@ -143,7 +143,7 @@ const UpdateProfile = () => {
                     id="email"
                     name="email"
                     type="text"
-                    className="input-field min-w-80 m-1 p-2 outline-none border border-gray-300 rounded-md focus:ring focus:ring-yellow-500"
+                    className="input-field sm:max-w-xs sm:w-full m-1 p-2 outline-none border border-gray-300 rounded-md focus:ring focus:ring-yellow-500"
                     disabled
                     value={currentUser.email}
                   />
@@ -158,7 +158,7 @@ const UpdateProfile = () => {
                     type="password"
                     autoComplete="new-password"
                     ref={passwordRef}
-                    className="input-field min-w-80 m-1 p-2 outline-none border border-gray-300 rounded-md focus:ring focus:ring-yellow-500"
+                    className="input-field sm:max-w-xs sm:w-full m-1 p-2 outline-none border border-gray-300 rounded-md focus:ring focus:ring-yellow-500"
                     placeholder="New Password (Leave blank to keep the same)"
                   />
                 </div>
@@ -172,7 +172,7 @@ const UpdateProfile = () => {
                     type="password"
                     autoComplete="new-password"
                     ref={passwordConfirmRef}
-                    className="input-field min-w-80 m-1 p-2 outline-none border border-gray-300 rounded-md focus:ring focus:ring-yellow-500"
+                    className="input-field sm:max-w-xs sm:w-full m-1 p-2 outline-none border border-gray-300 rounded-md focus:ring focus:ring-yellow-500"
                     placeholder="Confirm New Password"
                   />
                 </div>
