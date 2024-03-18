@@ -32,7 +32,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className="bg-yellow-400 fixed top-0 w-full z-50"
+      className="bg-yellow-400 fixed top-0 w-full z-50 mb-20"
       aria-label="Main navigation"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

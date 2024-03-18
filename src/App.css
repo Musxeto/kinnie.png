@@ -37,3 +37,6 @@ h1,h2,h3,div{
   .body{
     background-color: orange;
   }
+  .buttons-top{
+    margin-top: 6rem;
+  }
