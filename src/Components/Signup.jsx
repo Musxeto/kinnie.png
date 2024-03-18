@@ -39,7 +39,7 @@ const Signup = () => {
         {error && <p className="text-red-500 text-center">{error}</p>}
         <form onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm -space-y-px">
-            <div className="text-center">
+            <div className="text-center input-container">
               <label htmlFor="email" className="sr-only">
                 Email address
               </label>
@@ -50,11 +50,11 @@ const Signup = () => {
                 autoComplete="email"
                 ref={emailRef}
                 required
-                className="input-field m-3 p-2 outline-none border border-gray-300 rounded-md focus:ring focus:ring-yellow-500"
+                className="input-field p-2 outline-none border border-gray-300 rounded-md focus:ring focus:ring-yellow-500"
                 placeholder="Email address"
               />
             </div>
-            <div className="text-center">
+            <div className="text-center input-container">
               <label htmlFor="password" className="sr-only">
                 Password
               </label>
@@ -65,11 +65,11 @@ const Signup = () => {
                 autoComplete="new-password"
                 ref={passwordRef}
                 required
-                className="input-field m-3 p-2 outline-none border border-gray-300 rounded-md focus:ring focus:ring-yellow-500"
+                className="input-field mt-3 p-2 outline-none border border-gray-300 rounded-md focus:ring focus:ring-yellow-500"
                 placeholder="Password"
               />
             </div>
-            <div className="text-center">
+            <div className="text-center input-container">
               <label htmlFor="password-confirm" className="sr-only">
                 Confirm Password
               </label>
@@ -80,7 +80,7 @@ const Signup = () => {
                 autoComplete="new-password"
                 ref={passwordConfirmRef}
                 required
-                className="input-field m-3 p-2 outline-none border border-gray-300 rounded-md focus:ring focus:ring-yellow-500"
+                className="input-field mt-3 p-2 outline-none border border-gray-300 rounded-md focus:ring focus:ring-yellow-500"
                 placeholder="Confirm Password"
               />
             </div>
