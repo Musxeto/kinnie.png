@@ -5,6 +5,8 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+
+import { Firestore, getFirestore } from "firebase/firestore";
 const firebaseConfig = {
   apiKey: "AIzaSyCFgI55Gk39pY0ald9ph0Nhkltn9T9KBrI",
   authDomain: "dotpng-baadf.firebaseapp.com",
@@ -17,6 +19,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const storage = getStorage();
+const db = getFirestore();
 
 export { auth };
 
