@@ -69,15 +69,7 @@ const Login = () => {
               placeholder="Password"
             />
           </div>
-          <div className="flex items-center justify-between">
-            <div className="text-sm">
-              <Link
-                to="/forgot-pass"
-                className="font-medium text-yellow-600 hover:text-yellow-500"
-              >
-                Forgot password?
-              </Link>
-            </div>
+          <div className="flex flex-col items-center justify-between">
             <div>
               <button
                 type="submit"
@@ -87,11 +79,20 @@ const Login = () => {
                 {loading ? "Logging In..." : "Login"}
               </button>
             </div>
+
+            <div className="text-sm mt-4">
+              <Link
+                to="/forgot-pass"
+                className="font-medium text-yellow-600 hover:text-yellow-500"
+              >
+                Forgot password?
+              </Link>
+            </div>
           </div>
         </form>
         <div className="text-center mt-4">
           <p className="text-sm font-medium text-gray-600">
-            Don't have an account?{" "}
+            Don't have an account?{"    "}
             <Link
               to="/signup"
               className="text-yellow-600 hover:text-yellow-500"
