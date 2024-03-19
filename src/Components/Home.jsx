@@ -44,7 +44,7 @@ const Home = () => {
       <div className="mt-0 px-4">
         {/* Increased margin-top */}
         {activeTab === "gallery" && (
-          <div className="border flex flec-col items-> border-gray-100 p-6 bg-white rounded-lg shadow-md">
+          <div className="border flex flex-col items-center  border-gray-100 p-6 rounded-lg shadow-md">
             <Gallery />
           </div>
         )}
