@@ -22,7 +22,6 @@ const PicUploader = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      // Upload image and add its data to Firestore
       await uploadImageAndAddToFirestore(
         file,
         currentUser,
@@ -46,14 +45,14 @@ const PicUploader = () => {
         <form onSubmit={handleSubmit} className="flex flex-col items-center">
           <div>
             <input
-              id="image"
+              id="image-uploader"
               type="file"
               accept="image/*"
               onChange={handleFileChange}
               className="hidden"
             />
             <label
-              htmlFor="profile-pic"
+              htmlFor="image-uploader"
               className="text-yellow-600 underline py-1 px-2 rounded-md cursor-pointer hover:text-yellow-700"
             >
               Upload Your Kinnie Image

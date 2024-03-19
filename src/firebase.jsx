@@ -4,7 +4,13 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
-import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import {
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadBytes,
+  timestamp,
+} from "firebase/storage";
 
 import {
   Firestore,
@@ -15,12 +21,12 @@ import {
 } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCFgI55Gk39pY0ald9ph0Nhkltn9T9KBrI",
-  authDomain: "dotpng-baadf.firebaseapp.com",
-  projectId: "dotpng-baadf",
-  storageBucket: "dotpng-baadf.appspot.com",
-  messagingSenderId: "473340246999",
-  appId: "1:473340246999:web:64b22a4018d353e0ad2992",
+  apiKey: "AIzaSyB4OBDEjmdpObLnT-erINYBh_xK3QOff9A",
+  authDomain: "kinnie-cd8ed.firebaseapp.com",
+  projectId: "kinnie-cd8ed",
+  storageBucket: "kinnie-cd8ed.appspot.com",
+  messagingSenderId: "204157949502",
+  appId: "1:204157949502:web:e21a960880a21ac781236f",
 };
 
 const app = initializeApp(firebaseConfig);
@@ -48,7 +54,6 @@ export async function uploadProfilepic(file, currentUser, setLoading) {
     setLoading(false);
   }
 }
-// Function to upload image to Firebase Storage and add its data to Firestore
 export async function uploadImageAndAddToFirestore(
   file,
   currentUser,
@@ -65,16 +70,22 @@ export async function uploadImageAndAddToFirestore(
     const imageURL = await getDownloadURL(storageRef);
 
     // Add image data to Firestore
-    await addDoc(collection(db, "images"), {
+    const imageRef = collection(db, "images");
+    const uploadTime = timestamp(); // Timestamp of upload time
+    await addDoc(imageRef, {
       imageURL,
-      imageName,
+      imageHeading: imageName,
       imageDesc,
+      uploader: currentUser.uid,
+      uploadTime,
     });
 
-    setLoading(false); // Set loading to false after successful upload
+    // Set loading to false after successful upload
+    setLoading(false);
   } catch (error) {
+    // Handle any errors
     console.error("Error uploading image and adding to Firestore:", error);
     setLoading(false);
-    throw error;
+    throw error; // Re-throw the error to be handled in the component
   }
 }
