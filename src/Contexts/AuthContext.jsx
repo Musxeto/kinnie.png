@@ -67,11 +67,11 @@ export const AuthProvider = ({ children }) => {
   };
   const updateName = async (username) => {
     try {
-      await updateProfile(currentUser, {
+      await updateProfile(auth.currentUser, {
         displayName: username,
       });
       setCurrentUser({
-        ...currentUser,
+        ...auth.currentUser,
         displayName: username,
       });
     } catch (error) {

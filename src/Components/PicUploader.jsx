@@ -41,7 +41,7 @@ const PicUploader = () => {
       setImageDescription("");
       // Redirect or do something after successful upload
       setTimeout(() => {
-        setMessage("");
+        setMessage("ur kinnie uploaded bro uwu");
         const uform = document.querySelector(".upload");
         uform.reset();
         // navigate to desired page
@@ -52,6 +52,7 @@ const PicUploader = () => {
   return (
     <div className="flex justify-center items-center">
       <div className="w-full md:w-1/2 lg:w-1/3 p-6 rounded-lg shadow-lg bg-white">
+        {message && <p className="text-green-500 text-center">{message}</p>}
         <form
           onSubmit={handleSubmit}
           className="flex flex-col items-center upload"

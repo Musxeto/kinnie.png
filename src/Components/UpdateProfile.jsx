@@ -26,12 +26,12 @@ const UpdateProfile = () => {
   }
 
   async function handleClick() {
-    setMessage("uploading gxng :3");
+    setMessage("wait pweez...");
     setLoading(true); // Set loading state to true before starting upload
     await uploadProfilepic(photo, currentUser, setLoading);
     setPhotoURL(currentUser.photoURL);
     setLoading(false); // Set loading state to false after upload is completed
-    setMessage("Pic Uploaded Successfully gxng :3");
+    setMessage("Pic Uploaded gxng :3");
     setTimeout(() => {
       navigate("/");
     }, 3000);
