@@ -29,23 +29,19 @@ const PicUploader = () => {
         imageHeading,
         imageDescription
       );
-      setMessage("File Uploaded Successfully");
+      setFile(null);
+      setImageDescription("");
+      setImageHeading("");
+      setMessage("ur kinnie uploaded bro uwu");
     } catch (error) {
       console.error("Error uploading image and adding to Firestore:", error);
       setMessage("Error uploading image and adding to Firestore");
     } finally {
       setLoading(false);
-      // Clear input fields
-      setFile(null);
-      setImageHeading("");
-      setImageDescription("");
-      // Redirect or do something after successful upload
       setTimeout(() => {
-        setMessage("ur kinnie uploaded bro uwu");
-        const uform = document.querySelector(".upload");
-        uform.reset();
+        setMessage("");
         // navigate to desired page
-      }, 3000);
+      }, 4000);
     }
   };
 
@@ -87,7 +83,7 @@ const PicUploader = () => {
             required
             className="input-field mt-3 p-2 outline-none border border-gray-300 rounded-md focus:ring focus:ring-yellow-500"
           ></textarea>
-          {message && <p className="text-green-500 text-center">{message}</p>}
+
           <button
             type="submit"
             disabled={!file || loading}
