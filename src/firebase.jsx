@@ -6,7 +6,14 @@ import {
 } from "firebase/auth";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
-import { Firestore, getFirestore } from "firebase/firestore";
+import {
+  Firestore,
+  getFirestore,
+  addDoc,
+  getDoc,
+  collection,
+} from "firebase/firestore";
+
 const firebaseConfig = {
   apiKey: "AIzaSyCFgI55Gk39pY0ald9ph0Nhkltn9T9KBrI",
   authDomain: "dotpng-baadf.firebaseapp.com",
@@ -39,5 +46,35 @@ export async function uploadProfilepic(file, currentUser, setLoading) {
     // Handle any errors with updating the profile
     console.error("Error updating profile:", error);
     setLoading(false);
+  }
+}
+// Function to upload image to Firebase Storage and add its data to Firestore
+export async function uploadImageAndAddToFirestore(
+  file,
+  currentUser,
+  setLoading,
+  imageName,
+  imageDesc
+) {
+  try {
+    // Upload image to Firebase Storage
+    const storageRef = ref(storage, currentUser.uid + "/" + file.name);
+    await uploadBytes(storageRef, file);
+
+    // Get the download URL of the uploaded image
+    const imageURL = await getDownloadURL(storageRef);
+
+    // Add image data to Firestore
+    await addDoc(collection(db, "images"), {
+      imageURL,
+      imageName,
+      imageDesc,
+    });
+
+    setLoading(false); // Set loading to false after successful upload
+  } catch (error) {
+    console.error("Error uploading image and adding to Firestore:", error);
+    setLoading(false);
+    throw error;
   }
 }

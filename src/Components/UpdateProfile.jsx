@@ -13,6 +13,7 @@ const UpdateProfile = () => {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [photo, setPhoto] = useState(null);
+  const navigate = useNavigate();
   const [photoURL, setPhotoURL] = useState(
     "https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg"
   );
@@ -20,14 +21,20 @@ const UpdateProfile = () => {
   function handleChange(e) {
     if (e.target.files[0]) {
       setPhoto(e.target.files[0]);
-      setMessage("click upload if u s");
+      setMessage("click 'upload photo' if u seriously wanna change it");
     }
   }
 
   async function handleClick() {
     setMessage("uploading gxng :3");
+    setLoading(true); // Set loading state to true before starting upload
     await uploadProfilepic(photo, currentUser, setLoading);
     setPhotoURL(currentUser.photoURL);
+    setLoading(false); // Set loading state to false after upload is completed
+    setMessage("Pic Uploaded Successfully gxng :3");
+    setTimeout(() => {
+      navigate("/");
+    }, 3000);
   }
 
   useEffect(() => {
@@ -90,6 +97,7 @@ const UpdateProfile = () => {
                     src={photoURL}
                     alt="avatar"
                     className="h-40 w-40 profile-pic mb-1"
+                    onLoad={() => setLoading(false)} // Set loading to false when the image is loaded
                   />
                   <div className="flex flex-col  justify-center">
                     <div>
