@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useAuth } from "../Contexts/AuthContext";
-import { uploadImageAndAddToFirestore } from "../firebase"; // Import the function to upload image and add data to Firestore
-import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
+import { uploadImageAndAddToFirestore } from "../firebase";
+import { useNavigate } from "react-router-dom";
 
 const PicUploader = () => {
   const { currentUser } = useAuth();
@@ -9,7 +9,7 @@ const PicUploader = () => {
   const [imageHeading, setImageHeading] = useState("");
   const [imageDescription, setImageDescription] = useState("");
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate(); // Use useNavigate hook for navigation
+  const [message, setMessage] = useState("");
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -29,20 +29,33 @@ const PicUploader = () => {
         imageHeading,
         imageDescription
       );
-
-      // Redirect or do something after successful upload
-      navigate("/gallery"); // Example: Redirect to gallery page
+      setMessage("File Uploaded Successfully");
     } catch (error) {
       console.error("Error uploading image and adding to Firestore:", error);
+      setMessage("Error uploading image and adding to Firestore");
+    } finally {
       setLoading(false);
-      // Handle error
+      // Clear input fields
+      setFile(null);
+      setImageHeading("");
+      setImageDescription("");
+      // Redirect or do something after successful upload
+      setTimeout(() => {
+        setMessage("");
+        const uform = document.querySelector(".upload");
+        uform.reset();
+        // navigate to desired page
+      }, 3000);
     }
   };
 
   return (
     <div className="flex justify-center items-center">
       <div className="w-full md:w-1/2 lg:w-1/3 p-6 rounded-lg shadow-lg bg-white">
-        <form onSubmit={handleSubmit} className="flex flex-col items-center">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col items-center upload"
+        >
           <div>
             <input
               id="image-uploader"
@@ -73,6 +86,7 @@ const PicUploader = () => {
             required
             className="input-field mt-3 p-2 outline-none border border-gray-300 rounded-md focus:ring focus:ring-yellow-500"
           ></textarea>
+          {message && <p className="text-green-500 text-center">{message}</p>}
           <button
             type="submit"
             disabled={!file || loading}

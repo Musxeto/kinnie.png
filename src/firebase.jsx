@@ -4,13 +4,7 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
-import {
-  getDownloadURL,
-  getStorage,
-  ref,
-  uploadBytes,
-  timestamp,
-} from "firebase/storage";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
 import {
   Firestore,
@@ -18,6 +12,7 @@ import {
   addDoc,
   getDoc,
   collection,
+  serverTimestamp,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -71,7 +66,7 @@ export async function uploadImageAndAddToFirestore(
 
     // Add image data to Firestore
     const imageRef = collection(db, "images");
-    const uploadTime = timestamp(); // Timestamp of upload time
+    const uploadTime = serverTimestamp(); // Timestamp of upload time
     await addDoc(imageRef, {
       imageURL,
       imageHeading: imageName,
