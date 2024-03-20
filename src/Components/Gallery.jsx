@@ -19,6 +19,7 @@ const Gallery = () => {
         fetchedImages.push({ id: doc.id, ...doc.data() });
       });
       setImages(fetchedImages);
+      console.log(fetchedImages[0]);
     } catch (error) {
       setError(error.message);
     }
@@ -39,9 +40,14 @@ const Gallery = () => {
               className="w-full h-64 object-cover rounded-t-lg"
               loading="lazy"
             />
+
             <div className="p-4">
+              <h3 className="text-xl font-semibold mt-2">
+                {item.imageHeading}
+              </h3>
+              <p className="text-gray-700 mt-2">{item.imageDesc}</p>
               <div className="flex items-center mb-2">
-                {item.uploaderImageURL && (
+                {item.uploaderImage && (
                   <img
                     src={item.uploaderImage}
                     alt="Uploader"
@@ -49,16 +55,11 @@ const Gallery = () => {
                   />
                 )}
                 <p className="text-gray-600 text-sm">
-                  Uploaded by: {item.uploadedBy}
+                  Uploaded by: {item.uploader}
                 </p>
               </div>
-              <h3 className="text-xl font-semibold mt-2">
-                {item.imageHeading}
-              </h3>
-              <p className="text-gray-700 mt-2">{item.imageDesc}</p>
-              <p className="text-gray-500 text-sm mt-2">
-                Uploaded at: {item.uploadTime}
-              </p>
+
+              {/* <p className="text-gray-500 text-sm mt-2">{uploadAt}</p> */}
             </div>
           </div>
         ))}

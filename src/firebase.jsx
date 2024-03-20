@@ -69,9 +69,8 @@ export async function uploadImageAndAddToFirestore(
       imageURL,
       imageHeading: imageName,
       imageDesc,
-      uploader: currentUser.uid,
+      uploader: currentUser.displayName,
       uploaderImage: currentUser.photoURL,
-      uploadAt: Date.now(),
     });
 
     setLoading(false);
