@@ -33,24 +33,23 @@ const db = getFirestore();
 
 export { auth };
 export { db };
-//storage
 
 export async function uploadProfilepic(file, currentUser, setLoading) {
   const fileRef = ref(storage, currentUser.uid + ".png");
 
-  await uploadBytes(fileRef, file); // Wait for the upload to complete
+  await uploadBytes(fileRef, file);
 
-  const photoURL = await getDownloadURL(fileRef); // Get the download URL
+  const photoURL = await getDownloadURL(fileRef);
 
   try {
     await updateProfile(currentUser, { photoURL });
     setLoading(false);
   } catch (error) {
-    // Handle any errors with updating the profile
     console.error("Error updating profile:", error);
     setLoading(false);
   }
 }
+
 export async function uploadImageAndAddToFirestore(
   file,
   currentUser,
@@ -59,31 +58,26 @@ export async function uploadImageAndAddToFirestore(
   imageDesc
 ) {
   try {
-    // Upload image to Firebase Storage
     const storageRef = ref(storage, currentUser.uid + "/" + file.name);
     await uploadBytes(storageRef, file);
 
-    // Get the download URL of the uploaded image
     const imageURL = await getDownloadURL(storageRef);
 
-    // Add image data to Firestore
     const imageRef = collection(db, "images");
-    const uploadTime = serverTimestamp.toString(); // Timestamp of upload time
+
     await addDoc(imageRef, {
       imageURL,
-      imageHeading,
+      imageHeading: imageName,
       imageDesc,
       uploader: currentUser.uid,
       uploaderImage: currentUser.photoURL,
-      uploadTime,
+      uploadAt: Date.now(),
     });
 
-    // Set loading to false after successful upload
     setLoading(false);
   } catch (error) {
-    // Handle any errors
     console.error("Error uploading image and adding to Firestore:", error);
     setLoading(false);
-    throw error; // Re-throw the error to be handled in the component
+    throw error;
   }
 }
