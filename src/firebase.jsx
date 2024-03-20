@@ -14,6 +14,7 @@ import {
   collection,
   serverTimestamp,
   getDocs,
+  Timestamp,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -67,12 +68,13 @@ export async function uploadImageAndAddToFirestore(
 
     // Add image data to Firestore
     const imageRef = collection(db, "images");
-    const uploadTime = serverTimestamp(); // Timestamp of upload time
+    const uploadTime = serverTimestamp.toString(); // Timestamp of upload time
     await addDoc(imageRef, {
       imageURL,
-      imageHeading: imageName,
+      imageHeading,
       imageDesc,
       uploader: currentUser.uid,
+      uploaderImage: currentUser.photoURL,
       uploadTime,
     });
 

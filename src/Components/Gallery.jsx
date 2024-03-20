@@ -9,7 +9,7 @@ const Gallery = () => {
 
   useEffect(() => {
     fetchKinnieImages();
-  }, [images]);
+  }, []);
 
   const fetchKinnieImages = async () => {
     try {
@@ -17,7 +17,6 @@ const Gallery = () => {
       const fetchedImages = [];
       querySnapshot.forEach((doc) => {
         fetchedImages.push({ id: doc.id, ...doc.data() });
-        console.log({ id: doc.id, ...doc.data() });
       });
       setImages(fetchedImages);
     } catch (error) {
@@ -38,18 +37,27 @@ const Gallery = () => {
               src={item.imageURL}
               alt="Gallery"
               className="w-full h-64 object-cover rounded-t-lg"
-              loading="lazy" // Add lazy loading attribute
+              loading="lazy"
             />
             <div className="p-4">
-              <p className="text-gray-600 text-sm">
-                Uploaded by: {item.uploadedBy}
-              </p>
+              <div className="flex items-center mb-2">
+                {item.uploaderImageURL && (
+                  <img
+                    src={item.uploaderImage}
+                    alt="Uploader"
+                    className="w-8 h-8 rounded-full mr-2"
+                  />
+                )}
+                <p className="text-gray-600 text-sm">
+                  Uploaded by: {item.uploadedBy}
+                </p>
+              </div>
               <h3 className="text-xl font-semibold mt-2">
                 {item.imageHeading}
               </h3>
-              <p className="text-gray-700 mt-2">{item.imageDescription}</p>
+              <p className="text-gray-700 mt-2">{item.imageDesc}</p>
               <p className="text-gray-500 text-sm mt-2">
-                Uploaded at: {item.uploadedAt}
+                Uploaded at: {item.uploadTime}
               </p>
             </div>
           </div>
