@@ -8,6 +8,13 @@ import Login from "./Components/Login";
 import PrivateRoute from "./Components/PrivateRoute";
 import UpdateProfile from "./Components/UpdateProfile";
 import ForgorPass from "./Components/ForgorPass";
+
+const Signup = lazy(() => import("./Components/Signup"));
+const Home = lazy(() => import("./Components/Home"));
+const Login = lazy(() => import("./Components/Login"));
+const PrivateRoute = lazy(() => import("./Components/PrivateRoute"));
+const UpdateProfile = lazy(() => import("./Components/UpdateProfile"));
+const ForgorPass = lazy(() => import("./Components/ForgorPass"));
 function App() {
   return (
     <>
