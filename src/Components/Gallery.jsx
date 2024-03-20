@@ -1,92 +1,44 @@
-import React from "react";
+// Gallery.jsx
+import React, { useEffect, useState } from "react";
+import { db } from "../firebase";
+import { getDocs, collection } from "firebase/firestore";
 
 const Gallery = () => {
-  // Dummy data for demonstration
-  const galleryData = [
-    {
-      id: 1,
-      imageUrl: "https://via.placeholder.com/300",
-      uploadedBy: "User123",
-      imageHeading: "Beautiful Landscape",
-      imageDescription: "A stunning view of nature",
-      uploadedAt: "2024-03-19",
-    },
-    {
-      id: 2,
-      imageUrl: "https://via.placeholder.com/300",
-      uploadedBy: "User456",
-      imageHeading: "Amazing Sunset",
-      imageDescription: "Capturing the beauty of the sunset",
-      uploadedAt: "2024-03-18",
-    },
-    {
-      id: 3,
-      imageUrl: "https://via.placeholder.com/300",
-      uploadedBy: "User789",
-      imageHeading: "Lovely Flowers",
-      imageDescription: "Admiring the colorful flowers",
-      uploadedAt: "2024-03-17",
-    },
-    {
-      id: 3,
-      imageUrl: "https://via.placeholder.com/300",
-      uploadedBy: "User789",
-      imageHeading: "Lovely Flowers",
-      imageDescription: "Admiring the colorful flowers",
-      uploadedAt: "2024-03-17",
-    },
-    {
-      id: 3,
-      imageUrl: "https://via.placeholder.com/300",
-      uploadedBy: "User789",
-      imageHeading: "Lovely Flowers",
-      imageDescription: "Admiring the colorful flowers",
-      uploadedAt: "2024-03-17",
-    },
-    {
-      id: 3,
-      imageUrl: "https://via.placeholder.com/300",
-      uploadedBy: "User789",
-      imageHeading: "Lovely Flowers",
-      imageDescription: "Admiring the colorful flowers",
-      uploadedAt: "2024-03-17",
-    },
-    {
-      id: 3,
-      imageUrl: "https://via.placeholder.com/300",
-      uploadedBy: "User789",
-      imageHeading: "Lovely Flowers",
-      imageDescription: "Admiring the colorful flowers",
-      uploadedAt: "2024-03-17",
-    },
-    {
-      id: 3,
-      imageUrl: "https://via.placeholder.com/300",
-      uploadedBy: "User789",
-      imageHeading: "Lovely Flowers",
-      imageDescription: "Admiring the colorful flowers",
-      uploadedAt: "2024-03-17",
-    },
-    {
-      id: 3,
-      imageUrl: "https://via.placeholder.com/300",
-      uploadedBy: "User789",
-      imageHeading: "Lovely Flowers",
-      imageDescription: "Admiring the colorful flowers",
-      uploadedAt: "2024-03-17",
-    },
-    // Add more data as needed
-  ];
+  const [images, setImages] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    fetchKinnieImages();
+  }, [images]);
+
+  const fetchKinnieImages = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, "images"));
+      const fetchedImages = [];
+      querySnapshot.forEach((doc) => {
+        fetchedImages.push({ id: doc.id, ...doc.data() });
+        console.log({ id: doc.id, ...doc.data() });
+      });
+      setImages(fetchedImages);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  if (error) {
+    return <div>Error fetching images: {error}</div>;
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {galleryData.map((item) => (
+        {images.map((item) => (
           <div key={item.id} className="bg-white rounded-lg shadow-md">
             <img
-              src={item.imageUrl}
+              src={item.imageURL}
               alt="Gallery"
               className="w-full h-64 object-cover rounded-t-lg"
+              loading="lazy" // Add lazy loading attribute
             />
             <div className="p-4">
               <p className="text-gray-600 text-sm">

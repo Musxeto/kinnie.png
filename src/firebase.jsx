@@ -13,6 +13,7 @@ import {
   getDoc,
   collection,
   serverTimestamp,
+  getDocs,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -30,7 +31,7 @@ const storage = getStorage();
 const db = getFirestore();
 
 export { auth };
-
+export { db };
 //storage
 
 export async function uploadProfilepic(file, currentUser, setLoading) {
