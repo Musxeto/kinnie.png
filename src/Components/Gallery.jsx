@@ -37,12 +37,14 @@ const Gallery = () => {
             key={item.id}
             className="bg-white rounded-lg shadow-md overflow-hidden"
           >
-            <img
-              src={item.imageURL}
-              alt="Gallery"
-              className="w-full h-64 object-cover rounded-t-lg"
-              loading="lazy"
-            />
+            <a href={item.imageURL} target="_blank">
+              <img
+                src={item.imageURL}
+                alt="Gallery"
+                className="w-full h-64 object-cover rounded-t-lg"
+                loading="lazy"
+              />
+            </a>
 
             <div className="p-4">
               <h3 className="text-xl font-semibold text-gray-800 mt-2">
@@ -54,9 +56,10 @@ const Gallery = () => {
                   <img
                     src={item.uploaderImage}
                     alt="Uploader"
-                    className="w-8 h-8 rounded-full border border-yellow-400 mr-2"
+                    className="w-8 h-8 rounded-full border border-yellow-400 mr-2 hover:"
                     style={{ marginTop: "-0.7rem" }}
                   />
+
                   <p className="text-gray-700 text-sm">{item.uploader}</p>
                 </div>
               )}
