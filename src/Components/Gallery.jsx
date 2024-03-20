@@ -33,7 +33,10 @@ const Gallery = () => {
     <div className="container mx-auto px-4 py-8">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {images.map((item) => (
-          <div key={item.id} className="bg-white rounded-lg shadow-md">
+          <div
+            key={item.id}
+            className="bg-white rounded-lg shadow-md overflow-hidden"
+          >
             <img
               src={item.imageURL}
               alt="Gallery"
@@ -42,24 +45,21 @@ const Gallery = () => {
             />
 
             <div className="p-4">
-              <h3 className="text-xl font-semibold mt-2">
+              <h3 className="text-xl font-semibold text-gray-800 mt-2">
                 {item.imageHeading}
               </h3>
-              <p className="text-gray-700 mt-2">{item.imageDesc}</p>
-              <div className="flex items-center mb-2">
-                {item.uploaderImage && (
+              <p className="text-gray-600 mt-2">{item.imageDesc}</p>
+              {item.uploaderImage && (
+                <div className="flex items-center mt-4">
                   <img
                     src={item.uploaderImage}
                     alt="Uploader"
-                    className="w-8 h-8 rounded-full mr-2"
+                    className="w-8 h-8 rounded-full border border-yellow-400 mr-2"
+                    style={{ marginTop: "-0.7rem" }}
                   />
-                )}
-                <p className="text-gray-600 text-sm">
-                  Uploaded by: {item.uploader}
-                </p>
-              </div>
-
-              {/* <p className="text-gray-500 text-sm mt-2">{uploadAt}</p> */}
+                  <p className="text-gray-700 text-sm">{item.uploader}</p>
+                </div>
+              )}
             </div>
           </div>
         ))}
