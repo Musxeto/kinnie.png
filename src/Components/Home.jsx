@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { lazy, useState } from "react";
 import { useAuth } from "../Contexts/AuthContext";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
-import PicUploader from "./PicUploader";
-import Gallery from "./Gallery";
 
+const PicUploader = lazy(() => import("./PicUploader"));
+const Gallery = lazy(() => import("./Gallery"));
 const Home = () => {
   const { currentUser } = useAuth();
   const [activeTab, setActiveTab] = useState("gallery");
