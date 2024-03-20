@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, lazy } from "react";
 import "./App.css";
 // import Signup from "./Components/Signup";
 // import Home from "./Components/Home";
@@ -15,6 +15,7 @@ const Login = lazy(() => import("./Components/Login"));
 const PrivateRoute = lazy(() => import("./Components/PrivateRoute"));
 const UpdateProfile = lazy(() => import("./Components/UpdateProfile"));
 const ForgorPass = lazy(() => import("./Components/ForgorPass"));
+
 function App() {
   return (
     <>
