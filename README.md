@@ -19,8 +19,7 @@ Kinnie Gallery is a web application that allows users to upload, view, and share
 ![2024-03-21 (2)](https://github.com/Musxeto/kinnie.png/assets/138971833/50bf1971-2c7a-4a8f-a0b7-0dc9c5a37804)
 ![kinnie](https://github.com/Musxeto/kinnie.png/assets/138971833/a5a0eebf-514f-4c7d-8145-e8b19aff9c1d)
 ![2024-03-21 (7)](https://github.com/Musxeto/kinnie.png/assets/138971833/123a20d6-536a-478f-afca-8514f3931fa9)
-![2024-03-21 (5)](https://github.com/Musxeto/kinnie.png/assets/138971833/8c4eaef4-09d6-4341-b8e7-50690ffb971f)
-![2024-03-21 (6)](https://github.com/Musxeto/kinnie.png/assets/138971833/4f9b46a5-3ace-4d09-b1eb-eec8130c8e6a)
+
 
 
 ## Features
