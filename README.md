@@ -4,8 +4,8 @@ Kinnie Gallery is a web application that allows users to upload, view, and share
 
 ## Live Demo : https://kinnie-png.vercel.app/
 test the website : 
-EMAIL: test@kinni.png
-PASSOWRD: kinnie12
+EMAIL: ```test@kinnie.png```
+PASSOWRD: ```kinnie12```
 
 ## Table of Contents
 
