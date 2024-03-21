@@ -82,10 +82,10 @@ const Login = () => {
 
             <div className="text-sm mt-4">
               <Link
-                to="/forgot-pass"
+                to="/forgor-pass"
                 className="font-medium text-yellow-600 hover:text-yellow-500"
               >
-                Forgot password?
+                forgor pass 💀??
               </Link>
             </div>
           </div>
