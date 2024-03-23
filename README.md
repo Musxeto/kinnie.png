@@ -1,6 +1,6 @@
-﻿# Kinnie Gallery
+﻿# kinnie.png
 
-Kinnie Gallery is a web application that allows users to upload, view, and share images in a gallery format. It provides functionalities like user authentication, image uploading, and profile management.
+kinnie.png is a web application that allows users to upload, view, and share images in a gallery format. It provides functionalities like user authentication, image uploading, and profile management.
 
 ## Live Demo : https://kinnie-png.vercel.app/
 test the website : 
